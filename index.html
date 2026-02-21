@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Cars Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#0f0f0f;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 8%;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+nav h1{
+  font-weight:700;
+  letter-spacing:2px;
+  background:linear-gradient(45deg,gold,white);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+nav ul{
+  display:flex;
+  gap:25px;
+  list-style:none;
+}
+
+nav ul li{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+nav ul li:hover{
+  color:gold;
+}
+
+/* HERO */
+.hero{
+  height:90vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:linear-gradient(to right,#000000c2,#000000b6),
+  url('https://images.unsplash.com/photo-1549924231-f129b911e442?q=80&w=1920') center/cover no-repeat;
+}
+
+.hero h2{
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+.hero p{
+  max-width:600px;
+  opacity:0.8;
+  margin-bottom:30px;
+}
+
+.hero button{
+  padding:12px 30px;
+  border:none;
+  background:gold;
+  color:black;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.hero button:hover{
+  transform:scale(1.05);
+}
+
+/* FILTER */
+.filter{
+  text-align:center;
+  margin:50px 0 20px;
+}
+
+.filter button{
+  padding:8px 18px;
+  margin:10px;
+  border:1px solid gold;
+  background:transparent;
+  color:gold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.filter button.active,
+.filter button:hover{
+  background:gold;
+  color:black;
+}
+
+/* CARS GRID */
+.cars{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+  padding:40px 8%;
+}
+
+.card{
+  background:rgba(255,255,255,0.05);
+  border-radius:15px;
+  overflow:hidden;
+  transition:0.4s;
+  position:relative;
+  backdrop-filter:blur(8px);
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 15px 40px rgba(255,215,0,0.2);
+}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:20px;
+}
+
+.card-content h3{
+  margin-bottom:10px;
+}
+
+.price{
+  color:gold;
+  font-weight:600;
+  margin:8px 0;
+}
+
+.specs{
+  font-size:14px;
+  opacity:0.8;
+}
+
+/* SCROLL ANIMATION */
+.reveal{
+  opacity:0;
+  transform:translateY(50px);
+  transition:1s;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  background:#111;
+  margin-top:50px;
+  font-size:14px;
+  opacity:0.7;
+}
+
+@media(max-width:768px){
+  .hero h2{
+    font-size:2rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h1>LUXORA</h1>
+  <ul>
+    <li>Home</li>
+    <li>Cars</li>
+    <li>About</li>
+    <li>Contact</li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h2>Experience Automotive Excellence</h2>
+  <p>Discover the world’s most luxurious, powerful and elite vehicles crafted for performance and prestige.</p>
+  <button onclick="scrollToCars()">Explore Cars</button>
+</section>
+
+<div class="filter">
+  <button class="active" onclick="filterCars('all')">All</button>
+  <button onclick="filterCars('sedan')">Sedan</button>
+  <button onclick="filterCars('suv')">SUV</button>
+  <button onclick="filterCars('sports')">Sports</button>
+</div>
+
+<section class="cars" id="cars">
+
+  <div class="card reveal" data-category="sedan">
+    <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=1920">
+    <div class="card-content">
+      <h3>Mercedes S-Class</h3>
+      <p class="price">$120,000</p>
+      <p class="specs">Luxury Sedan • 4.0L V8 • 0-100km/h in 4.5s</p>
+    </div>
+  </div>
+
+  <div class="card reveal" data-category="sports">
+    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1920">
+    <div class="card-content">
+      <h3>Lamborghini Aventador</h3>
+      <p class="price">$500,000</p>
+      <p class="specs">V12 Engine • 770 HP • 0-100km/h in 2.8s</p>
+    </div>
+  </div>
+
+  <div class="card reveal" data-category="suv">
+    <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c6?q=80&w=1920">
+    <div class="card-content">
+      <h3>Range Rover Autobiography</h3>
+      <p class="price">$150,000</p>
+      <p class="specs">Luxury SUV • AWD • Premium Interior</p>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 Luxora | Crafted with Precision & Prestige
+</footer>
+
+<script>
+function filterCars(category){
+  const cards = document.querySelectorAll('.card');
+  const buttons = document.querySelectorAll('.filter button');
+
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  cards.forEach(card=>{
+    if(category === 'all' || card.dataset.category === category){
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+
+function scrollToCars(){
+  document.getElementById('cars').scrollIntoView({behavior:'smooth'});
+}
+
+// Scroll Reveal
+window.addEventListener('scroll', ()=>{
+  const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(el=>{
+    const windowHeight = window.innerHeight;
+    const elementTop = el.getBoundingClientRect().top;
+    if(elementTop < windowHeight - 100){
+      el.classList.add('active');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
